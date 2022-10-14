@@ -3,15 +3,12 @@ window.onload = function(){
     const board = document.getElementById("board");
     let status = document.getElementById('status');
     const game = document.querySelector('.game');
-    // const resetButton = document.querySelector('btn');
     const newGameBtn = document.querySelector(".btn");
-    //newGame.setAttribute("class", "btn");
     let squares = document.querySelectorAll("#board div");
     let box = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
     let currentPlayer = "X";
     let X = true;
     newGameBtn.addEventListener("click", newGame);
-    //newGame.classList.add("controls");
 
     
     const updateBox =  (index) => {
@@ -19,15 +16,12 @@ window.onload = function(){
     }
 
     const switchPlayer = () => {
-        //board.classList.remove("Player", currentPlayer);
-        
         if (currentPlayer == "X"){
             currentPlayer = "O"; 
         }
         else{
             currentPlayer = "X";
         }
-        board.classList.add(currentPlayer);
     }
 
     const winningConditions = [
@@ -45,7 +39,7 @@ window.onload = function(){
     const PLAYERO_WON = 'PLAYERO_WON';
     const TIE = 'TIE';
 
-    function handleResultValidation() {
+    function showResults() {
         let roundWon = false;
         for (let i = 0; i <= 7; i++) {
             const winCondition = winningConditions[i];
@@ -92,8 +86,7 @@ window.onload = function(){
             squares.classList.add(currentPlayer);
             updateBox(index);
             switchPlayer();
-            
-            handleResultValidation();
+            showResults();
         }
     }
     
@@ -130,7 +123,6 @@ window.onload = function(){
 
         box = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
         X = true;
-        // status = document.getElementById('status');
         status.innerText = "Move your mouse over a square and click to play an X or an O.";
         status.setAttribute("class","status");
         if (currentPlayer === 'O') {
