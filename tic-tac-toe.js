@@ -2,24 +2,32 @@
 window.onload = function(){
     const board = document.getElementById("board");
     let status = document.getElementById('status');
-    const newGame = document.getElementById("btn");
-    const squares = document.querySelectorAll("#board div");
+    const game = document.querySelector('.game');
+    // const resetButton = document.querySelector('btn');
+    const newGameBtn = document.querySelector(".btn");
+    //newGame.setAttribute("class", "btn");
+    let squares = document.querySelectorAll("#board div");
     let box = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
     let currentPlayer = "X";
     let X = true;
+    newGameBtn.addEventListener("click", newGame);
+    //newGame.classList.add("controls");
 
     
     const updateBox =  (index) => {
         box[index] = currentPlayer;
     }
 
-    const changePlayer = () => {
+    const switchPlayer = () => {
+        //board.classList.remove("Player", currentPlayer);
+        
         if (currentPlayer == "X"){
-            currentPlayer = "O";
+            currentPlayer = "O"; 
         }
         else{
             currentPlayer = "X";
         }
+        board.classList.add(currentPlayer);
     }
 
     const winningConditions = [
@@ -66,7 +74,7 @@ window.onload = function(){
     const announce = (type) => {
         switch(type){
             case PLAYERO_WON:
-                status.innerHTML = "Congratulations! X is the Winner!";
+                status.innerHTML = 'Congratulations! X is the Winner!';
                 break;
             case PLAYERX_WON:
                 status.innerHTML = "Congratulations! O is the Winner!";
@@ -79,46 +87,65 @@ window.onload = function(){
 
 
     const userAction = (squares, index) => {
-        if(X) {
+        if(X && squares.innerHTML == "") {
             squares.innerHTML = currentPlayer;
             squares.classList.add(currentPlayer);
             updateBox(index);
-            changePlayer();
+            switchPlayer();
+            
             handleResultValidation();
         }
     }
+    
+    // function mouseOver(squares){
+    //     squares.addEventListener("onmouseenter", squares.setAttribute("class", "hover"));
+    // }
 
+    // function mouseOut(squares){
+    //     //squares.addEventListener("onmouseleave", console.log("yyX"));
+    //     //squares.setAttribute("class", "hover O"));
+    //     squares.onmousemove => {
+
+    //     };
+    // }
+    
     squares.forEach( (squares, index) => {
+        
         squares.addEventListener('click', () => userAction(squares, index));
+       
         
         
     });
 
     for (let s in squares){
+    
         squares[s].classList.add("square");
         //squares[s].setAttribute("class","square");
         
     }
 
+    newGame.addEventListener("click", resetBoard);
+    
+    function newGame() {
 
-    const resetBoard = () => {
-        box = ['', '', '', '', '', '', '', '', ''];
+        box = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
         X = true;
-        status = document.getElementById('status');
-
+        // status = document.getElementById('status');
+        status.innerText = "Move your mouse over a square and click to play an X or an O.";
+        status.setAttribute("class","status");
         if (currentPlayer === 'O') {
-            changePlayer();
+            switchPlayer();
         }
 
         squares.forEach(squares => {
-            squares.innerText = ' ';
-            squares.classList.remove('playerX');
-            squares.classList.remove('playerO');
+            squares.innerText = "";
+            squares.classList.remove('X');
+            squares.classList.remove('O');
         });
     }
 
 
-    newGame.addEventListener('click', resetBoard());
+    
 
 }
 
