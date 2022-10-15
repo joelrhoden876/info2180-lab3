@@ -74,7 +74,7 @@ window.onload = function(){
                 status.innerHTML = "Congratulations! O is the Winner!";
                 break;
              case TIE:
-                 status.innerText = 'Tie';
+                 status.innerText = 'Tie!';
         }
         status.setAttribute("class","you-won");
     };
@@ -94,9 +94,7 @@ window.onload = function(){
     squares.forEach( (squares, index) => {
         
         squares.addEventListener('click', () => userAction(squares, index));
-       
-        
-        
+         
     });
 
     for (let s in squares){
@@ -107,10 +105,8 @@ window.onload = function(){
         
     }
 
-    newGame.addEventListener("click", resetBoard);
     
     function newGame() {
-
         box = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
         X = true;
         status.innerText = "Move your mouse over a square and click to play an X or an O.";
@@ -118,7 +114,6 @@ window.onload = function(){
         if (currentPlayer === 'O') {
             switchPlayer();
         }
-
         squares.forEach(squares => {
             squares.innerText = "";
             squares.classList.remove('X');
