@@ -90,17 +90,6 @@ window.onload = function(){
         }
     }
     
-    // function mouseOver(squares){
-    //     squares.addEventListener("onmouseenter", squares.setAttribute("class", "hover"));
-    // }
-
-    // function mouseOut(squares){
-    //     //squares.addEventListener("onmouseleave", console.log("yyX"));
-    //     //squares.setAttribute("class", "hover O"));
-    //     squares.onmousemove => {
-
-    //     };
-    // }
     
     squares.forEach( (squares, index) => {
         
@@ -113,7 +102,8 @@ window.onload = function(){
     for (let s in squares){
     
         squares[s].classList.add("square");
-        //squares[s].setAttribute("class","square");
+        squares[s].onmouseover = function(){squares[s].classList.toggle('hover', true)}
+        squares[s].onmouseout = function(){squares[s].classList.toggle('hover', false)}
         
     }
 
