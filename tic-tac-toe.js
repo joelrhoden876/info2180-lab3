@@ -7,7 +7,7 @@ window.onload = function(){
     let squares = document.querySelectorAll("#board div");
     let box = [' ',' ',' ',' ',' ',' ',' ',' ',' '];
     let currentPlayer = "X";
-    let X = true;
+    let gameRunning = true;
     newGameBtn.addEventListener("click", newGame);
 
     
@@ -57,7 +57,7 @@ window.onload = function(){
 
     if (roundWon) {
             announce(currentPlayer === 'X' ? PLAYERX_WON : PLAYERO_WON);
-            X = false;
+            gameRunning = false;
             return;
         }
 
@@ -80,8 +80,8 @@ window.onload = function(){
     };
 
 
-    const userAction = (squares, index) => {
-        if(X && squares.innerHTML == "") {
+    const clicked = (squares, index) => {
+        if(gameRunning && squares.innerHTML == "") {
             squares.innerHTML = currentPlayer;
             squares.classList.add(currentPlayer);
             updateBox(index);
@@ -93,7 +93,7 @@ window.onload = function(){
     
     squares.forEach( (squares, index) => {
         
-        squares.addEventListener('click', () => userAction(squares, index));
+        squares.addEventListener('click', () => clicked(squares, index));
          
     });
 
@@ -108,7 +108,7 @@ window.onload = function(){
     
     function newGame() {
         box = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
-        X = true;
+        gameRunning = true;
         status.innerText = "Move your mouse over a square and click to play an X or an O.";
         status.setAttribute("class","status");
         if (currentPlayer === 'O') {
